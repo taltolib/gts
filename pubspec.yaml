@@ -38,14 +38,14 @@ flutter:
   uses-material-design: true
 
 
-  # assets:
-  #   - images/a_dot_burr.jpeg
-  #   - images/a_dot_ham.jpeg
+  assets:
+      - assets/image/icons/flights/
+      - assets/image/icons/button/
+      - assets/image/background/
+      - assets/image/logo/
+      - assets/translations/
 
 
-
-
- 
   fonts:
     - family: Mulish
       fonts:

@@ -1,0 +1,7 @@
+{
+  "auth": {
+    "login": "Login",
+    "password": "Parol",
+    "confirm_password": "Parolni tasdiqlash"
+  }
+}

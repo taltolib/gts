@@ -1,0 +1,7 @@
+{
+  "auth": {
+    "login": "login",
+    "password": "password",
+    "confirm_password": "confirm_password"
+  }
+}
