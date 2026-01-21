@@ -1,7 +1,21 @@
 {
+
   "auth": {
     "login": "Электронная почта",
     "password": "Введите пароль",
     "confirm_password": "Подтвердите пароль"
+  },
+
+
+  "services": {
+    "flights": "Перелёты",
+    "hotels": "Отели",
+    "railway": "Ж/Д",
+    "transfers": "Трансферы",
+    "tours": "Туры",
+    "insurance": "Страхование",
+    "excursions": "Экскурсии",
+    "esim": "e-sim"
   }
+
 }

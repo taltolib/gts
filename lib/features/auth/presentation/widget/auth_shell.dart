@@ -1,7 +1,4 @@
-
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 
 class AuthShell extends StatelessWidget {
   const AuthShell({super.key, required this.child});
@@ -20,7 +17,7 @@ class AuthShell extends StatelessWidget {
                 IconButton(
                   icon: Icon(
                     Icons.brightness_6,
-                    size: 30.sh,
+                    size: 30,
                     color: Colors.blue,
                   ),
                   onPressed: () {}

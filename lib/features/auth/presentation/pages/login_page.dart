@@ -1,7 +1,9 @@
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:gts/generated/fonts/app_fonts.dart';
+import 'package:gts/generated/tr/app_text.dart';
 import 'package:gts/shared/widget/auth_text_field.dart';
 
 class LoginPage extends StatefulWidget {
@@ -27,7 +29,7 @@ class _LoginPageState extends State<LoginPage> {
           children: [
             AuthTextField(
               controller: loginController,
-              label: AppText.auth.login,
+              label: AppText.auth.login.tr(),
             ),
             AuthTextField(
               controller: passwordController,

@@ -3,5 +3,17 @@
     "login": "login",
     "password": "password",
     "confirm_password": "confirm_password"
+  },
+
+  "services": {
+    "flights": "Flights",
+    "hotels": "Hotels",
+    "railway": "Railway",
+    "transfers": "Transfers",
+    "tours": "Tours",
+    "insurance": "Insurance",
+    "excursions": "Excursions",
+    "esim": "e-sim"
   }
+
 }

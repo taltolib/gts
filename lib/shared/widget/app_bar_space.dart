@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gts/core/theme/app_colors.dart';
 import 'package:gts/generated/image/app_image.dart';
 
@@ -13,12 +12,7 @@ class AppBarSpace extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Image.asset(
-          AppImages.logo.logo,
-          width: 115,
-          height: 32,
-          fit: BoxFit.cover,
-        ),
+        AppImages.logo.logo(width: 115,height: 32,),
         buttonCategory(onTap),
       ],
     );
@@ -33,14 +27,14 @@ Widget buttonCategory(VoidCallback onTap) {
       highlightColor: Colors.transparent,
       onTap: onTap,
       child: Container(
-        width: 40.w,
-        height: 40.h,
+        width: 40,
+        height: 40,
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(32).r,
-          border: BoxBorder.all(width: 0.8.w,color: AppColors.button.white.withOpacity(0.15)),
+          borderRadius: BorderRadius.circular(32),
+          border: BoxBorder.all(width: 0.8,color: AppColors.button.white.withOpacity(0.15)),
           color: AppColors.button.white.withOpacity(0.80),
         ),
-        child: Icon(Icons.grid_view_rounded, size: 18.sp, color: AppColors.button.grey),
+        child: Icon(Icons.grid_view_rounded, size: 18, color: AppColors.button.grey),
       ),
     ),
   );

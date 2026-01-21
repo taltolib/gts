@@ -1,3 +1,18 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
+
+Widget _svg(String path, double? width, double? height, Color? color) {
+  return SvgPicture.asset(
+    path,
+    width: width,
+    height: height,
+    colorFilter: color != null
+        ? ColorFilter.mode(color, BlendMode.srcIn)
+        : null,
+    fit: BoxFit.contain,
+  );
+}
+
 class AppImages {
   AppImages._();
 
@@ -10,49 +25,83 @@ class AppImages {
 class _FlightIcons {
   static const String _base = 'assets/image/icons/flights';
 
-  String get eSim => '$_base/e_sim_icon.png';
 
-  String get excursion => '$_base/excursion_icon.png';
+  Widget eSim({double? width, double? height, Color? color}) =>
+      _svg('$_base/e_sim_icon.svg', width, height, color);
 
-  String get flights => '$_base/flights_icon.png';
+  Widget excursion({double? width, double? height, Color? color}) =>
+      _svg('$_base/excursion_icon.svg', width, height, color);
 
-  String get hotels => '$_base/hotels_icon.png';
+  Widget flights({double? width, double? height, Color? color}) =>
+      _svg('$_base/flights_icon.svg', width, height, color);
 
-  String get insurance => '$_base/insurance_icon.png';
+  Widget hotels({double? width, double? height, Color? color}) =>
+      _svg('$_base/hotels_icon.svg', width, height, color);
 
-  String get railway => '$_base/railway_icon.png';
+  Widget insurance({double? width, double? height, Color? color}) =>
+      _svg('$_base/insurance_icon.svg', width, height, color);
 
-  String get tours => '$_base/tours_icon.png';
+  Widget railway({double? width, double? height, Color? color}) =>
+      _svg('$_base/railway_icon.svg', width, height, color);
 
-  String get transfers => '$_base/transfers_icon.png';
+  Widget tours({double? width, double? height, Color? color}) =>
+      _svg('$_base/tours_icon.svg', width, height, color);
 
-  List<String> get all => [
-    flights,
-    hotels,
-    railway,
-    transfers,
-    tours,
-    insurance,
-    excursion,
-    eSim,
+  Widget transfers({double? width, double? height, Color? color}) =>
+      _svg('$_base/transfers_icon.svg', width, height, color);
+
+  List<Widget> all({double? width, double? height, Color? color}) => [
+    flights(width: width, height: height, color: color),
+    hotels(width: width, height: height, color: color),
+    railway(width: width, height: height, color: color),
+    transfers(width: width, height: height, color: color),
+    tours(width: width, height: height, color: color),
+    insurance(width: width, height: height, color: color),
+    excursion(width: width, height: height, color: color),
+    eSim(width: width, height: height, color: color),
   ];
 }
 
 class _BackGround {
   static const String _base = 'assets/image/background';
 
-  String get backgroundWhite => '$_base/background.png';
+  Widget backgroundWhite({
+    double? width,
+    double? height,
+    BoxFit fit = BoxFit.cover,
+  }) =>
+      SvgPicture.asset(
+        '$_base/background.svg',
+        width: width,
+        height: height,
+        fit: fit,
+      );
 }
 
-class _Logo  {
 
+class _Logo {
   static const String _base = 'assets/image/logo';
 
-  String get logo => '$_base/gts_logo.png';
+  Widget logo({double? width, double? height}) =>
+      SvgPicture.asset(
+        '$_base/gts_logo.svg',
+        width: width,
+        height: height,
+        fit: BoxFit.contain,
+      );
 }
+
+
 
 class _WidgetOther {
+
   static const String _base = 'assets/image/icons/button';
 
-  String get settingsButton => '$_base/settings_button.png';
+  Widget swapRoute({double? width, double? height, Color? color}) =>
+      _svg('$_base/swap_route.svg', width, height, color);
 }
+
+
+
+
+

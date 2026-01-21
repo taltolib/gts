@@ -3,12 +3,15 @@ import 'package:flutter/material.dart';
 class AppColors {
   static _TestColor fonts = _TestColor();
   static _WidgetButton button = _WidgetButton();
-  static Type common = _TestColor;
+  static _AppBrandColors brandColors = _AppBrandColors();
+  static _OtherColors other = _OtherColors();
 }
 
 class _TestColor {
   Color textPrimary = Color(0xFF030640);
   Color textSecondary = Color(0xFF1E2633);
+  Color grey = Color(0xFF44546F);
+  Color greyLight = Color(0xFF626F86);
 
   Color accent = Color(0xFF00BCD4);
 
@@ -22,4 +25,18 @@ class _TestColor {
 class _WidgetButton {
   Color grey = Color(0xFF44546F);
   Color white = Color(0xFFFFFFFF);
+}
+
+class _AppBrandColors {
+
+  Color blueAccent = Color(0xFF00B7DA);
+  Color secondary = Color(0xFFF5F5F5);
+  Color grey = Color(0xFF44546F);
+
+
+}
+
+
+class _OtherColors {
+  Color greyLightBorder = Color(0xFFD9DDE4);
 }

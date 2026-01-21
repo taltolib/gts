@@ -1,36 +1,38 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:gts/core/theme/app_colors.dart';
 import 'package:gts/generated/fonts/app_fonts.dart';
+import 'package:gts/main/app.dart';
 
 class CustomTextField extends StatefulWidget {
-  Function()? onTap;
-  String? hintText;
+  VoidCallback onTap;
+  String hintText;
   Icon? icon;
-  bool? isIcon;
-  bool? isDirections;
+  bool isIcon;
+  bool isDirections;
+  TextEditingController? controller;
 
-  CustomTextField({required this.onTap, required this.hintText, super.key});
+  CustomTextField({
+    super.key,
+    required this.onTap,
+    required this.hintText,
+    this.controller,
+    this.icon,
+    this.isIcon = false,
+    this.isDirections = false,
+  });
 
   @override
   State<CustomTextField> createState() => _CustomTextFieldState();
 }
 
 class _CustomTextFieldState extends State<CustomTextField> {
-  bool isIcon = false;
-  bool isDirections = false;
+  String addressA = 'Откуда';
 
+  String addressB = 'Куда';
 
-
-  @override
-  void initState() {
-    isIcon = widget.isIcon ?? false;
-    isDirections = widget.isDirections ?? false;
-    super.initState();
-  }
-
-
-  Widget child (){
-    return Text('TASH',style:AppFonts.mulish.s15w600());
+  Widget child() {
+    return Text('TASH', style: AppFonts.mulish.s15w600());
   }
 
   @override
@@ -38,30 +40,29 @@ class _CustomTextFieldState extends State<CustomTextField> {
     return GestureDetector(
       onTap: widget.onTap,
       child: Container(
-        height: 52.h,
-        width: 304.w,
+        height: 52,
+        width: double.infinity,
         decoration: BoxDecoration(
           color: Colors.white,
-          border: BoxBorder.all(width: 1.w, color: Colors.grey),
+          border: BoxBorder.all(
+            width: 1,
+            color: AppColors.other.greyLightBorder,
+          ),
           borderRadius: BorderRadius.circular(12.r),
         ),
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 14.h),
           child: Row(
             children: [
-              Expanded(
-                flex: 2,
-                child: TextField(
-                  onTap: widget.onTap,
-                  decoration: InputDecoration(hintText: widget.hintText),
-                ),
-              ),
-              SizedBox(width: 30.w,),
-              isIcon == true ? Expanded  (
-                flex: 1,
-                child: child(),
-              ): Container(),
-               isDirections == true ? Expanded(flex: 1, child: widget.icon!) : Container(),
+              Text(widget.hintText, style: AppFonts.mulish.s15w600()),
+              widget.hintText == addressA
+                  ? Text(
+                      widget.hintText,
+                      style: AppFonts.mulish.s15w600(
+                        color: AppColors.fonts.greyLight,
+                      ),
+                    )
+                  : Text(widget.hintText, style: AppFonts.mulish.s15w600(color: AppColors.fonts.greyLight)),
             ],
           ),
         ),

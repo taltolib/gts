@@ -3,5 +3,17 @@
     "login": "Login",
     "password": "Parol",
     "confirm_password": "Parolni tasdiqlash"
+  },
+
+  "services": {
+    "flights": "Parvozlar",
+    "hotels": "Mehmonxonalar",
+    "railway": "Temir yo‘l",
+    "transfers": "Transferlar",
+    "tours": "Turlar",
+    "insurance": "Sug‘urta",
+    "excursions": "Ekskursiyalar",
+    "esim": "e-sim"
   }
+
 }
