@@ -1,70 +1,77 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gts/core/theme/app_colors.dart';
 import 'package:gts/generated/fonts/app_fonts.dart';
-import 'package:gts/main/app.dart';
+import 'package:gts/generated/image/app_image.dart';
 
-class CustomTextField extends StatefulWidget {
-  VoidCallback onTap;
-  String hintText;
-  Icon? icon;
-  bool isIcon;
-  bool isDirections;
-  TextEditingController? controller;
+class CustomTextField extends StatelessWidget {
+  final String hint;
+  final String? value;
+  final String? shortValue;
+  final VoidCallback onTap;
+  final bool isIcon;
 
-  CustomTextField({
+  const CustomTextField({
     super.key,
+    required this.hint,
     required this.onTap,
-    required this.hintText,
-    this.controller,
-    this.icon,
+    this.value,
+    this.shortValue,
     this.isIcon = false,
-    this.isDirections = false,
   });
 
   @override
-  State<CustomTextField> createState() => _CustomTextFieldState();
-}
-
-class _CustomTextFieldState extends State<CustomTextField> {
-  String addressA = 'Откуда';
-
-  String addressB = 'Куда';
-
-  Widget child() {
-    return Text('TASH', style: AppFonts.mulish.s15w600());
-  }
-
-  @override
   Widget build(BuildContext context) {
+    final bool hasValue = value != null && value!.isNotEmpty;
     return GestureDetector(
-      onTap: widget.onTap,
+      onTap: onTap,
       child: Container(
         height: 52,
-        width: double.infinity,
         decoration: BoxDecoration(
+          border: Border.all(color: AppColors.other.greyLightBorder),
+          borderRadius: BorderRadius.circular(12),
           color: Colors.white,
-          border: BoxBorder.all(
-            width: 1,
-            color: AppColors.other.greyLightBorder,
-          ),
-          borderRadius: BorderRadius.circular(12.r),
         ),
-        child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 14.h),
-          child: Row(
-            children: [
-              Text(widget.hintText, style: AppFonts.mulish.s15w600()),
-              widget.hintText == addressA
-                  ? Text(
-                      widget.hintText,
-                      style: AppFonts.mulish.s15w600(
-                        color: AppColors.fonts.greyLight,
+        padding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            if (hasValue)Text(
+                hint,
+                style: AppFonts.mulish.s15w400(
+                  color: AppColors.fonts.greyLight,
+                ),
+              ),
+            Expanded(
+              child: Row(
+                children: [
+                  Expanded(
+                    flex: 3,
+                    child: Text(
+                      hasValue ? value! : hint,
+                      style: hasValue
+                          ? AppFonts.mulish.s15w500(
+                              color: AppColors.fonts.black500,
+                            )
+                          : AppFonts.mulish.s15w600(
+                              color: AppColors.fonts.grey,
+                            ),
+                    ),
+                  ),
+                  if (hasValue && shortValue != null)
+                    Expanded(
+                      flex: 1,
+                      child: Text(
+                        shortValue!,
+                        style: AppFonts.mulish.s15w600(
+                          color: AppColors.fonts.grey,
+                        ),
                       ),
-                    )
-                  : Text(widget.hintText, style: AppFonts.mulish.s15w600(color: AppColors.fonts.greyLight)),
-            ],
-          ),
+                    ),
+
+                ],
+              ),
+            ),
+          ],
         ),
       ),
     );

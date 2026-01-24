@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gts/core/theme/app_colors.dart';
 import 'package:gts/generated/image/app_image.dart';
 
+// ignore: must_be_immutable
 class AppBarSpace extends StatelessWidget {
   VoidCallback onTap;
 

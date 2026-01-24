@@ -22,8 +22,10 @@ dependencies:
   go_router: ^17.0.1
   #https://pub.dev/packages/easy_localization
   easy_localization: ^3.0.8
-  #https://pub.dev/packages/bloc
-  bloc: ^9.2.0
+  #https://pub.dev/packages/provider
+  provider: ^6.1.5+1
+
+
 
 
 dev_dependencies:

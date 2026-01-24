@@ -27,7 +27,16 @@ class _TextStyleMulish {
     );
   }
 
-   TextStyle s12w200({Color color = Colors.black}) =>
+  TextStyle s10w200({Color color = Colors.black}) =>
+      _base(size: 10, weight: FontWeight.w200, color: color);
+
+  TextStyle s10w300({Color color = Colors.black}) =>
+      _base(size: 10, weight: FontWeight.w300, color: color);
+
+  TextStyle s10w400({Color color = Colors.black}) =>
+      _base(size: 10, weight: FontWeight.w400, color: color);
+
+  TextStyle s12w200({Color color = Colors.black}) =>
       _base(size: 12, weight: FontWeight.w200, color: color);
 
    TextStyle s12w300({Color color = Colors.black}) =>
@@ -53,6 +62,19 @@ class _TextStyleMulish {
 
    TextStyle s14w400({Color color = Colors.black}) =>
       _base(size: 14, weight: FontWeight.w400, color: color);
+
+  TextStyle s15w200({Color color = Colors.black}) =>
+      _base(size: 15, weight: FontWeight.w200, color: color);
+
+  TextStyle s15w300({Color color = Colors.black}) =>
+      _base(size: 15, weight: FontWeight.w300, color: color);
+
+  TextStyle s15w400({Color color = Colors.black}) =>
+      _base(size: 15, weight: FontWeight.w400, color: color);
+
+
+  TextStyle s15w500({Color color = Colors.black}) =>
+      _base(size: 15, weight: FontWeight.w500, color: color);
 
    TextStyle s15w600({Color color = Colors.black}) =>
       _base(size: 15, weight: FontWeight.w600, color: color);

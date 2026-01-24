@@ -26,7 +26,7 @@ class ServiceTabBar extends StatelessWidget {
           controller: tabController,
           isScrollable: true,
           tabAlignment: TabAlignment.start,
-          labelPadding: EdgeInsets.zero,
+          labelPadding: EdgeInsets.zero, overlayColor: MaterialStateProperty.all(Colors.transparent),
           indicatorSize: TabBarIndicatorSize.label,
           indicator: UnderlineTabIndicator(
             borderSide: BorderSide(width: 3, color: AppColors.fonts.accent),
