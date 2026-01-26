@@ -23,18 +23,23 @@ class _FlightsTabState extends State<FlightsTab> {
     return Stack(
       children: [
         Column(
-          spacing: 10,
+          mainAxisSize: MainAxisSize.min,
           children: [
+            const SizedBox(height: 10),
             flightsFromData(),
+            const SizedBox(height: 6),
             flightsToData(),
+            const SizedBox(height: 6),
             Row(
               children: [
                 flightsWhenData(),
-                const SizedBox(width: 10),
+                const SizedBox(width: 6),
                 flightsBackData(),
               ],
             ),
+            const SizedBox(height: 6),
             flightClassSelector(),
+            const SizedBox(height: 15),
             Row(
               children: [
                 isOneDayButtonWidget(
@@ -47,11 +52,13 @@ class _FlightsTabState extends State<FlightsTab> {
                 ),
               ],
             ),
+            const SizedBox(height: 15 ),
             searchButton(),
+            const SizedBox(height: 10),
             difficultRouteButton(),
           ],
         ),
-        Positioned(right: 20, top: 35, child: ButtonReplace(onTap: () {})),
+        Positioned(right: 20, top: 45, child: ButtonReplace(onTap: () {})),
       ],
     );
   }
@@ -127,8 +134,7 @@ Widget isOneDayButtonWidget(bool isOneDay, VoidCallback onTap) {
   );
 }
 
-
-Widget difficultRouteButton (){
+Widget difficultRouteButton() {
   return CustomButton(
     text: "Сложный маршрут",
     onTap: () {},
@@ -143,7 +149,7 @@ Widget difficultRouteButton (){
   );
 }
 
-Widget searchButton (){
+Widget searchButton() {
   return CustomButton(
     text: 'Поиск',
     icon: AppImages.other.searchIcon(color: AppColors.button.white),

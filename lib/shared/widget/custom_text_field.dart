@@ -8,15 +8,18 @@ class CustomTextField extends StatelessWidget {
   final String? value;
   final String? shortValue;
   final VoidCallback onTap;
+  final bool isTextDown;
   final bool isIcon;
+
 
   const CustomTextField({
     super.key,
     required this.hint,
     required this.onTap,
     this.value,
-    this.shortValue,
     this.isIcon = false,
+    this.shortValue,
+    this.isTextDown = false,
   });
 
   @override
@@ -26,6 +29,7 @@ class CustomTextField extends StatelessWidget {
       onTap: onTap,
       child: Container(
         height: 52,
+        width: double.infinity,
         decoration: BoxDecoration(
           border: Border.all(color: AppColors.other.greyLightBorder),
           borderRadius: BorderRadius.circular(12),
@@ -41,11 +45,11 @@ class CustomTextField extends StatelessWidget {
                   color: AppColors.fonts.greyLight,
                 ),
               ),
-            Expanded(
+             Expanded(
               child: Row(
                 children: [
                   Expanded(
-                    flex: 3,
+                    flex: isTextDown == false ? 4 :3,
                     child: Text(
                       hasValue ? value! : hint,
                       style: hasValue
@@ -67,7 +71,8 @@ class CustomTextField extends StatelessWidget {
                         ),
                       ),
                     ),
-
+                  Expanded(child: Container()),
+                  if (isIcon) AppImages.other.ArrowDownIcon(width:20,height: 20 ),
                 ],
               ),
             ),

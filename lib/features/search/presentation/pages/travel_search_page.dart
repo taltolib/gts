@@ -29,7 +29,7 @@ class _TravelSearchPageState extends State<TravelSearchPage> {
                 SizedBox(height: 30),
                 ContentContainer(child: SearchTabs()),
                 SizedBox(height: 20),
-                buttonAddWidget(),
+                // buttonAddWidget(),
               ],
             ),
           ),
