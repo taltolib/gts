@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:gts/features/search/presentation/pages/tabs/flights/widget/flights_tab.dart';
+import 'package:gts/features/search/presentation/pages/tabs/hotels/hotel_tab.dart';
 
-class ServiceTabView extends StatelessWidget {
+
+class ServiceTabView extends StatefulWidget {
   final TabController tabController;
 
   const ServiceTabView({
@@ -10,22 +12,25 @@ class ServiceTabView extends StatelessWidget {
   });
 
   @override
+  State<ServiceTabView> createState() => _ServiceTabViewState();
+}
+
+class _ServiceTabViewState extends State<ServiceTabView> {
+
+  List<Widget> items =[
+    FlightsTab(),
+    HotelTab(),
+    FlightsTab(),
+    HotelTab(),
+    FlightsTab(),
+    HotelTab(),
+    FlightsTab(),
+    HotelTab(),
+  ];
+
+  @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: TabBarView(
-        controller: tabController,
-        children: [
-          FlightsTab(),
-          Container(color: Colors.yellow),
-          Container(color: Colors.green),
-          Container(color: Colors.blue),
-          Container(color: Colors.purple),
-          Container(color: Colors.orange),
-          Container(color: Colors.pink),
-          Container(color: Colors.grey),
-        ],
-      ),
-    );
+    return items[widget.tabController.index];
   }
 }
 
@@ -53,7 +58,5 @@ class TrainTab {
   const TrainTab();
 }
 
-class HotelsTab {
-  const HotelsTab();
-}
+
 

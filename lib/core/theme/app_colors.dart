@@ -3,10 +3,13 @@ import 'package:flutter/material.dart';
 class AppColors {
   // ignore: library_private_types_in_public_api
   static _TestColor fonts = _TestColor();
+
   // ignore: library_private_types_in_public_api
   static _WidgetButton button = _WidgetButton();
+
   // ignore: library_private_types_in_public_api
   static _AppBrandColors brandColors = _AppBrandColors();
+
   // ignore: library_private_types_in_public_api
   static _OtherColors other = _OtherColors();
 }
@@ -34,15 +37,12 @@ class _WidgetButton {
 }
 
 class _AppBrandColors {
-
   Color blueAccent = Color(0xFF00B7DA);
   Color secondary = Color(0xFFF5F5F5);
   Color grey = Color(0xFF44546F);
-
-
-
+  Color blueLight = Color(0xFFE9F2FF);
+  Color white = Color(0xFFFFFFFF);
 }
-
 
 class _OtherColors {
   Color greyLightBorder = Color(0xFFD9DDE4);

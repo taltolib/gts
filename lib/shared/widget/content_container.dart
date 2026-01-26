@@ -10,9 +10,11 @@ class ContentContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 536.h,
       width: double.infinity,
       decoration: BoxDecoration(
+        boxShadow: [
+          BoxShadow(color: AppColors.other.greyLightBorder.withOpacity(0.08),blurStyle: BlurStyle.solid,blurRadius: 7)
+        ],
         color: AppColors.fonts.background,
         borderRadius: BorderRadius.circular(20.r),
       ),

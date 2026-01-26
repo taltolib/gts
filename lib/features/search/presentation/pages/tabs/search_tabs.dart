@@ -11,7 +11,6 @@ class SearchTabs extends StatefulWidget {
 
 class _SearchTabsState extends State<SearchTabs>
     with SingleTickerProviderStateMixin {
-
   late TabController _tabController;
 
   @override
@@ -32,6 +31,7 @@ class _SearchTabsState extends State<SearchTabs>
     return Material(
       color: Colors.transparent,
       child: Column(
+        mainAxisSize: MainAxisSize.min,
         children: [
           ServiceTabBar(tabController: _tabController),
           ServiceTabView(tabController: _tabController),

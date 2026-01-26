@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:gts/core/theme/app_colors.dart';
 import 'package:gts/generated/fonts/app_fonts.dart';
+import 'package:gts/generated/image/app_image.dart';
 import 'package:gts/shared/widget/button_replace.dart';
+import 'package:gts/shared/widget/custom_button.dart';
 import 'package:gts/shared/widget/custom_text_field.dart';
 import 'package:gts/shared/widget/todo_choice_widget.dart';
 
@@ -45,6 +47,8 @@ class _FlightsTabState extends State<FlightsTab> {
                 ),
               ],
             ),
+            searchButton(),
+            difficultRouteButton(),
           ],
         ),
         Positioned(right: 20, top: 35, child: ButtonReplace(onTap: () {})),
@@ -123,3 +127,30 @@ Widget isOneDayButtonWidget(bool isOneDay, VoidCallback onTap) {
   );
 }
 
+
+Widget difficultRouteButton (){
+  return CustomButton(
+    text: "Сложный маршрут",
+    onTap: () {},
+    textColor: AppColors.brandColors.grey,
+    style: AppButtonStyle.light,
+    icon: AppImages.other.difficultRoute(),
+
+    iconColor: AppColors.brandColors.grey,
+    backgroundColor: AppColors.brandColors.white,
+    borderColor: AppColors.other.greyLightBorder,
+    widthBorder: 1,
+  );
+}
+
+Widget searchButton (){
+  return CustomButton(
+    text: 'Поиск',
+    icon: AppImages.other.searchIcon(color: AppColors.button.white),
+    onTap: () {},
+    iconColor: AppColors.button.white,
+    backgroundColor: AppColors.brandColors.blueAccent,
+    textColor: AppColors.button.white,
+    style: AppButtonStyle.filled,
+  );
+}

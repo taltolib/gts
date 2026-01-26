@@ -25,7 +25,6 @@ class AppImages {
 class _FlightIcons {
   static const String _base = 'assets/image/icons/flights';
 
-
   Widget eSim({double? width, double? height, Color? color}) =>
       _svg('$_base/e_sim_icon.svg', width, height, color);
 
@@ -69,42 +68,46 @@ class _BackGround {
     double? width,
     double? height,
     BoxFit fit = BoxFit.cover,
-  }) =>
-      SvgPicture.asset(
-        '$_base/background.svg',
-        width: width,
-        height: height,
-        fit: fit,
-      );
+  }) => SvgPicture.asset(
+    '$_base/background.svg',
+    width: width,
+    height: height,
+    fit: fit,
+  );
 }
-
 
 class _Logo {
   static const String _base = 'assets/image/logo';
 
-  Widget logo({double? width, double? height}) =>
-      SvgPicture.asset(
-        '$_base/gts_logo.svg',
-        width: width,
-        height: height,
-        fit: BoxFit.contain,
-      );
+  Widget logo({double? width, double? height}) => SvgPicture.asset(
+    '$_base/gts_logo.svg',
+    width: width,
+    height: height,
+    fit: BoxFit.contain,
+  );
 }
 
-
-
 class _WidgetOther {
-
   static const String _base = 'assets/image/icons/button';
 
   Widget swapRoute({double? width, double? height, Color? color}) =>
       _svg('$_base/swap_route.svg', width, height, color);
 
-  Widget ArrowDownIcon ({double? width, double? height, Color? color}) =>
+  Widget ArrowDownIcon({double? width, double? height, Color? color}) =>
       _svg('$_base/arrow_down.svg', width, height, color);
+
+  Widget addWidget({double? width, double? height, Color? color}) =>
+      _svg("$_base/add_widget.svg", width, height, color);
+
+
+  Widget difficultRoute({double? width, double? height, Color? color}) =>
+      _svg("$_base/difficult_route.svg", width, height, color);
+
+
+  Widget searchIcon({double? width, double? height, Color? color}) =>
+      _svg("$_base/search.svg", width, height, color);
+
+
+
+
 }
-
-
-
-
-

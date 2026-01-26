@@ -79,6 +79,12 @@ class _TextStyleMulish {
    TextStyle s15w600({Color color = Colors.black}) =>
       _base(size: 15, weight: FontWeight.w600, color: color);
 
+  TextStyle s16w500({Color color = Colors.black}) =>
+      _base(size: 16, weight: FontWeight.w500, color: color);
+
+  TextStyle s16w600({Color color = Colors.black}) =>
+      _base(size: 16, weight: FontWeight.w600, color: color);
+
    TextStyle s16w700({Color color = Colors.black}) =>
       _base(size: 16, weight: FontWeight.w700, color: color);
 }
