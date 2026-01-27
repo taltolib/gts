@@ -14,12 +14,6 @@ class ServiceTabBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        Positioned(
-          bottom: 0,
-          left: 0,
-          right: 0,
-          child: Container(height: 1, color: Colors.grey[200]),
-        ),
         Padding(
           padding:const EdgeInsets.only(bottom: 8, top: 10),
           child: TabBar(

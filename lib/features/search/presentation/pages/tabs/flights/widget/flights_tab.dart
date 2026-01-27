@@ -4,7 +4,7 @@ import 'package:gts/generated/fonts/app_fonts.dart';
 import 'package:gts/generated/image/app_image.dart';
 import 'package:gts/shared/widget/button_replace.dart';
 import 'package:gts/shared/widget/custom_button.dart';
-import 'package:gts/shared/widget/custom_text_field.dart';
+import 'package:gts/shared/widget/form_value_field.dart';
 import 'package:gts/shared/widget/todo_choice_widget.dart';
 
 class FlightsTab extends StatefulWidget {
@@ -65,7 +65,7 @@ class _FlightsTabState extends State<FlightsTab> {
 }
 
 Widget flightsFromData() {
-  return CustomTextField(
+  return FormValueField(
     hint: 'Откуда',
     onTap: () {},
     shortValue: '',
@@ -74,7 +74,7 @@ Widget flightsFromData() {
 }
 
 Widget flightsToData() {
-  return CustomTextField(
+  return FormValueField(
     onTap: () {},
     hint: 'Куда',
     shortValue: 'TASH',
@@ -84,18 +84,18 @@ Widget flightsToData() {
 
 Widget flightsBackData() {
   return Expanded(
-    child: CustomTextField(onTap: () {}, hint: 'Обратно', value: ''),
+    child: FormValueField(onTap: () {}, hint: 'Обратно', value: ''),
   );
 }
 
 Widget flightsWhenData() {
   return Expanded(
-    child: CustomTextField(onTap: () {}, hint: 'Когда', value: '23.01.2026'),
+    child: FormValueField(onTap: () {}, hint: 'Когда', value: '23.01.2026'),
   );
 }
 
 Widget flightClassSelector() {
-  return CustomTextField(
+  return FormValueField(
     onTap: () {},
     hint: 'Эконом класс',
     shortValue: '',

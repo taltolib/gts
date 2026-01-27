@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gts/shared/widget/custom_text_field.dart';
+import 'package:gts/shared/widget/form_value_field.dart';
 
 class InsuranceTab extends StatelessWidget {
   const InsuranceTab({super.key});
@@ -21,5 +21,5 @@ class InsuranceTab extends StatelessWidget {
 }
 
 Widget flightsFromData() {
-  return CustomTextField(onTap: () {}, hint: 'Куда', value: 'Tashkent,Livan,Uzbekistan,USA,India,Africa',isIcon: true,);
+  return FormValueField(onTap: () {}, hint: 'Куда', value: 'Tashkent,Livan,Uzbekistan,USA,India,Africa',isIcon: true,);
 }

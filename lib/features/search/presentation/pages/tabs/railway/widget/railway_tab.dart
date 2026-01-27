@@ -3,7 +3,7 @@ import 'package:gts/core/theme/app_colors.dart';
 import 'package:gts/generated/image/app_image.dart';
 import 'package:gts/shared/widget/button_replace.dart';
 import 'package:gts/shared/widget/custom_button.dart';
-import 'package:gts/shared/widget/custom_text_field.dart';
+import 'package:gts/shared/widget/form_value_field.dart';
 
 class RailwayTab extends StatelessWidget {
   const RailwayTab({super.key});
@@ -32,7 +32,7 @@ class RailwayTab extends StatelessWidget {
 }
 
 Widget flightsFromData() {
-  return CustomTextField(
+  return FormValueField(
     hint: 'Откуда',
     onTap: () {},
     shortValue: '',
@@ -41,11 +41,11 @@ Widget flightsFromData() {
 }
 
 Widget flightsToData() {
-  return CustomTextField(onTap: () {}, hint: 'Куда', value: '');
+  return FormValueField(onTap: () {}, hint: 'Куда', value: '');
 }
 
 Widget flightsWhenData() {
-  return CustomTextField(onTap: () {}, hint: 'Когда', value: '');
+  return FormValueField(onTap: () {}, hint: 'Когда', value: '');
 }
 
 Widget searchButton() {
