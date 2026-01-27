@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:gts/features/search/presentation/pages/tabs/esim/widget/esim_tab.dart';
+import 'package:gts/features/search/presentation/pages/tabs/excursion/widget/excursion_tab.dart';
 import 'package:gts/features/search/presentation/pages/tabs/flights/widget/flights_tab.dart';
 import 'package:gts/features/search/presentation/pages/tabs/hotels/widget/hotel_tab.dart';
 import 'package:gts/features/search/presentation/pages/tabs/insurance/widget/insurance_tab.dart';
@@ -28,8 +30,8 @@ class _ServiceTabViewState extends State<ServiceTabView> {
     TransferTab(),
     ToursTab(),
     InsuranceTab(),
-    FlightsTab(),
-    HotelTab(),
+    ExcursionTab(),
+    EsimTab(),
   ];
 
   @override

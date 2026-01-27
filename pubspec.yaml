@@ -24,6 +24,7 @@ dependencies:
   easy_localization: ^3.0.8
   #https://pub.dev/packages/provider
   provider: ^6.1.5+1
+  country_flags: ^4.1.2
 
 
 
