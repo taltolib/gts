@@ -16,22 +16,22 @@ class _CustomTextFieldState extends State<CustomTextField> {
     return TextFormField(
       cursorRadius: Radius.circular(12),
       decoration: InputDecoration(
-        suffixIcon: AppImages.other.searchIcon(
-          height: 22,
-          width: 22,
+        prefixIcon: AppImages.other.searchIcon(
+          height: 20,
+          width: 20,
           color: AppColors.brandColors.grey,
         ),
+
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
           borderSide: BorderSide(color: AppColors.brandColors.grey,
             width: 1,
           ),
         ),
-        counterText:  "Поиск",
-        counterStyle: AppFonts.mulish.s14w400(color: AppColors.fonts.greyLight),
+        hintText: "Поиск",
+        hintStyle:AppFonts.mulish.s14w400(color: AppColors.fonts.greyLight),
         hoverColor: AppColors.brandColors.grey,
         fillColor: AppColors.brandColors.grey,
-        filled: true,
       ),
     );
   }

@@ -1,77 +1,45 @@
 import 'package:flutter/material.dart';
-import 'package:gts/core/theme/app_colors.dart';
-import 'package:gts/generated/fonts/app_fonts.dart';
-import 'package:gts/generated/image/app_image.dart';
-import 'package:gts/shared/widget/custom_text_field.dart';
 
 class AppSelectionSheet extends StatelessWidget {
-  final String title;
-  late double? heightSize;
-  bool isSearch = false;
+  final Widget? header;
+  final Widget body;
+  final Widget? bottom;
 
-  AppSelectionSheet({super.key, required this.title, this.heightSize});
+  const AppSelectionSheet({
+    super.key,
+    this.header,
+    required this.body,
+    this.bottom,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: heightSize ?? 772,
-      decoration: BoxDecoration(
-        color: AppColors.brandColors.white,
-        borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(28),
-          topRight: Radius.circular(28),
+    return SafeArea(
+      top: false,
+      child: Container(
+        decoration: const BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.vertical(
+            top: Radius.circular(28),
+          ),
         ),
-      ),
-      child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16),
         child: Column(
           children: [
-            titleWidget(title),
-            SizedBox(height: 12),
-            isSearch == true ? searchWidget() : Container(),
-            SizedBox(height: 15),
-            bodyWidget(),
+            const SizedBox(height: 16),
+            if (header != null) ...[
+              header!,
+              const SizedBox(height: 12),
+            ],
+            Expanded(child: body),
+            if (bottom != null) ...[
+              const SizedBox(height: 12),
+              bottom!,
+              const SizedBox(height: 16),
+            ],
           ],
         ),
       ),
     );
   }
-}
-
-Widget titleWidget(String text) {
-  return Expanded(
-    flex: 1,
-    child: Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Text(text, style: AppFonts.mulish.s18w700()),
-        buttonClose(),
-      ],
-    ),
-  );
-}
-
-Widget searchWidget() {
-  return Expanded(flex: 2, child: CustomTextField());
-}
-
-Widget bodyWidget() {
-  return Expanded(flex: 8, child: Container());
-}
-
-Widget buttonClose() {
-  return GestureDetector(
-    onTap: () {},
-    child: Container(
-      height: 34,
-      width: 34,
-      decoration: BoxDecoration(
-        border: BoxBorder.all(color: AppColors.other.greyLightBorder,width: 0.8, ),
-        color: AppColors.brandColors.white,
-        borderRadius: BorderRadius.circular(32),
-
-
-      ),
-    ),
-  );
 }

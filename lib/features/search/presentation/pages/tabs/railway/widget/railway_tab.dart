@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gts/core/theme/app_colors.dart';
+import 'package:gts/generated/fonts/app_fonts.dart';
 import 'package:gts/generated/image/app_image.dart';
 import 'package:gts/shared/widget/button_replace.dart';
 import 'package:gts/shared/widget/custom_button.dart';
@@ -50,6 +51,7 @@ Widget flightsWhenData() {
 
 Widget searchButton() {
   return CustomButton(
+    textStyle: AppFonts.mulish.s16w600(color: AppColors.button.white),
     text: 'Поиск',
     icon: AppImages.other.searchIcon(color: AppColors.button.white),
     onTap: () {},

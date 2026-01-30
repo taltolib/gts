@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gts/core/theme/app_colors.dart';
 import 'package:gts/features/search/presentation/pages/tabs/search_tabs.dart';
+import 'package:gts/generated/fonts/app_fonts.dart';
 import 'package:gts/generated/image/app_image.dart';
 import 'package:gts/shared/widget/app_bar_space.dart';
 import 'package:gts/shared/widget/content_container.dart';
@@ -48,6 +49,7 @@ Widget backgroundFill() {
 Widget buttonAddWidget (){
   return CustomButton(
     text: 'Добавить виджет',
+    textStyle: AppFonts.mulish.s16w600(color: AppColors.brandColors.blueAccent),
     onTap: () {},
     icon: AppImages.other.addWidget(),
     iconColor: AppColors.brandColors.blueAccent,

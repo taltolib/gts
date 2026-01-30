@@ -39,40 +39,17 @@ class FormValueField extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            if (hasValue)Text(
-                hint,
-                style: AppFonts.mulish.s15w400(
-                  color: AppColors.fonts.greyLight,
-                ),
-              ),
+            if (hasValue)hintTextWidget(hint),
              Expanded(
               child: Row(
                 children: [
                   Expanded(
                     flex: isTextDown == false ? 4 :3,
-                    child: Text(
-                      hasValue ? value! : hint,
-                      style: hasValue
-                          ? AppFonts.mulish.s15w500(
-                              color: AppColors.fonts.black500,
-                            )
-                          : AppFonts.mulish.s15w600(
-                              color: AppColors.fonts.grey,
-                            ),
-                    ),
+                    child: fontsSize(value, hint, hasValue,),
                   ),
                   if (hasValue && shortValue != null)
-                    Expanded(
-                      flex: 1,
-                      child: Text(
-                        shortValue!,
-                        style: AppFonts.mulish.s15w600(
-                          color: AppColors.fonts.grey,
-                        ),
-                      ),
-                    ),
-                  Expanded(child: Container()),
-                  if (isIcon) AppImages.other.ArrowDownIcon(width:20,height: 20 ),
+                    shortValueTextWidget(shortValue),
+                  if (isIcon) iconWidget(),
                 ],
               ),
             ),
@@ -81,4 +58,42 @@ class FormValueField extends StatelessWidget {
       ),
     );
   }
+}
+
+Widget hintTextWidget (String hint){
+  return Text(
+    hint,
+    style: AppFonts.mulish.s15w400(
+      color: AppColors.fonts.greyLight,
+    ),
+  );
+}
+
+Widget shortValueTextWidget (String? shortValue){
+  return Expanded(
+    flex: 1,
+    child: Text(
+      shortValue!,
+      style: AppFonts.mulish.s15w600(
+        color: AppColors.fonts.grey,
+      ),
+    ),
+  );
+}
+
+Widget fontsSize ( String? value, String hint, bool hasValue){
+  return Text(
+    hasValue ? value! : hint,
+    style: hasValue
+        ? AppFonts.mulish.s15w500(
+      color: AppColors.fonts.black500,
+    )
+        : AppFonts.mulish.s15w600(
+      color: AppColors.fonts.grey,
+    ),
+  );
+}
+
+Widget iconWidget (){
+  return AppImages.other.ArrowDownIcon(width:20,height: 20 );
 }

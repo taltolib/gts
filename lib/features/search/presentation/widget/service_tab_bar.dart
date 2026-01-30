@@ -28,7 +28,6 @@ class ServiceTabBar extends StatelessWidget {
           ),
           tabs: List.generate(AppText.services.all.length, (index) {
             final isSelected = tabController.index == index;
-
             final icons = AppImages.flight.all(
               width: 20,
               height: 20,
@@ -36,7 +35,6 @@ class ServiceTabBar extends StatelessWidget {
                   ? AppColors.brandColors.blueAccent
                   : AppColors.brandColors.grey,
             );
-
             return Padding(
               padding: EdgeInsets.symmetric(horizontal: 12),
               child: Column(
@@ -44,14 +42,7 @@ class ServiceTabBar extends StatelessWidget {
                 children: [
                   icons[index],
                   SizedBox(height: 4),
-                  Text(
-                    AppText.services.all[index].tr(),
-                    style: AppFonts.mulish.s12w600(
-                      color: isSelected
-                          ? AppColors.brandColors.blueAccent
-                          : AppColors.brandColors.grey,
-                    ),
-                  ),
+                  _nameIcon(index, isSelected),
                   SizedBox(height: 8),
                 ],
               ),
@@ -62,4 +53,15 @@ class ServiceTabBar extends StatelessWidget {
     ],
     );
   }
+}
+
+Widget _nameIcon ( int index, bool isSelected){
+  return Text(
+    AppText.services.all[index].tr(),
+    style: AppFonts.mulish.s12w600(
+      color: isSelected
+          ? AppColors.brandColors.blueAccent
+          : AppColors.brandColors.grey,
+    ),
+  );
 }

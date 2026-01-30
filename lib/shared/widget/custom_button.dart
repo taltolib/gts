@@ -11,7 +11,7 @@ enum AppButtonStyle {
 class CustomButton extends StatelessWidget {
   final String text;
   final VoidCallback onTap;
-
+  final TextStyle? textStyle;
   final Widget? icon;
   final double height;
   final double radius;
@@ -35,6 +35,7 @@ class CustomButton extends StatelessWidget {
     this.textColor,
     this.iconColor,
     this.widthBorder,
+    required this.textStyle,
   });
 
   @override
@@ -90,14 +91,18 @@ class CustomButton extends StatelessWidget {
                 ),
                 const SizedBox(width: 10),
               ],
-              Text(
-                text,
-                style: AppFonts.mulish.s16w600(color: txt),
-              ),
+              textStyleWidget(text, textStyle!),
             ],
           ),
         ),
       ),
     );
   }
+}
+
+Widget textStyleWidget(String text, TextStyle style) {
+  return Text(
+    text,
+    style: style,
+  );
 }

@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:gts/core/theme/app_colors.dart';
+import 'package:gts/features/search/presentation/pages/tabs/flights/sheets/from_city_sheet.dart';
 import 'package:gts/generated/fonts/app_fonts.dart';
 import 'package:gts/generated/image/app_image.dart';
 import 'package:gts/shared/widget/button_replace.dart';
 import 'package:gts/shared/widget/custom_button.dart';
+import 'package:gts/shared/widget/custom_show_bottom_sheet_dialog.dart';
 import 'package:gts/shared/widget/form_value_field.dart';
+import 'package:gts/shared/widget/header_show_bottom_sheet_dialog.dart';
 import 'package:gts/shared/widget/todo_choice_widget.dart';
 
 class FlightsTab extends StatefulWidget {
@@ -26,36 +29,36 @@ class _FlightsTabState extends State<FlightsTab> {
           mainAxisSize: MainAxisSize.min,
           children: [
             const SizedBox(height: 10),
-            flightsFromData(),
+            _flightsFromData(context),
             const SizedBox(height: 6),
-            flightsToData(),
+            _flightsToData(context),
             const SizedBox(height: 6),
             Row(
               children: [
-                flightsWhenData(),
+                _flightsWhenData(context),
                 const SizedBox(width: 6),
-                flightsBackData(),
+                _flightsBackData(context),
               ],
             ),
             const SizedBox(height: 6),
-            flightClassSelector(),
+            _flightClassSelector(),
             const SizedBox(height: 15),
             Row(
               children: [
-                isOneDayButtonWidget(
+                _isOneDayButtonWidget(
                   isOneDay,
                   () => setState(() => isOneDay = !isOneDay),
                 ),
-                inStockButtonWidget(
+                _inStockButtonWidget(
                   inStock,
                   () => setState(() => inStock = !inStock),
                 ),
               ],
             ),
-            const SizedBox(height: 15 ),
-            searchButton(),
+            const SizedBox(height: 15),
+            _searchButton(),
             const SizedBox(height: 10),
-            difficultRouteButton(),
+            _difficultRouteButton(),
           ],
         ),
         Positioned(right: 20, top: 45, child: ButtonReplace(onTap: () {})),
@@ -64,16 +67,36 @@ class _FlightsTabState extends State<FlightsTab> {
   }
 }
 
-Widget flightsFromData() {
+
+Widget _flightsFromData(context) {
   return FormValueField(
     hint: 'Откуда',
-    onTap: () {},
+    onTap: () {
+      customShowBottomSheetDialog(
+        context,
+        0.9,
+        HeaderShowBottomSheetDialog(
+          title: 'Откуда',
+          child1: FromCitySheet(),
+          child2: Container(),
+        ),
+        Container(),
+        CustomButton(
+          textStyle: AppFonts.mulish.s14w600(color: AppColors.button.white),
+          text: 'Готово',
+          onTap: () {},
+          backgroundColor: AppColors.brandColors.blueAccent,
+          textColor: AppColors.button.white,
+          style: AppButtonStyle.filled,
+        ),
+      );
+    },
     shortValue: '',
     value: '',
   );
 }
 
-Widget flightsToData() {
+Widget _flightsToData(context) {
   return FormValueField(
     onTap: () {},
     hint: 'Куда',
@@ -82,19 +105,19 @@ Widget flightsToData() {
   );
 }
 
-Widget flightsBackData() {
+Widget _flightsBackData(context) {
   return Expanded(
     child: FormValueField(onTap: () {}, hint: 'Обратно', value: ''),
   );
 }
 
-Widget flightsWhenData() {
+Widget _flightsWhenData(context) {
   return Expanded(
     child: FormValueField(onTap: () {}, hint: 'Когда', value: '23.01.2026'),
   );
 }
 
-Widget flightClassSelector() {
+Widget _flightClassSelector() {
   return FormValueField(
     onTap: () {},
     hint: 'Эконом класс',
@@ -104,7 +127,7 @@ Widget flightClassSelector() {
   );
 }
 
-Widget inStockButtonWidget(bool inStock, VoidCallback onTap) {
+Widget _inStockButtonWidget(bool inStock, VoidCallback onTap) {
   return Expanded(
     child: Row(
       children: [
@@ -119,7 +142,7 @@ Widget inStockButtonWidget(bool inStock, VoidCallback onTap) {
   );
 }
 
-Widget isOneDayButtonWidget(bool isOneDay, VoidCallback onTap) {
+Widget _isOneDayButtonWidget(bool isOneDay, VoidCallback onTap) {
   return Expanded(
     child: Row(
       children: [
@@ -134,8 +157,9 @@ Widget isOneDayButtonWidget(bool isOneDay, VoidCallback onTap) {
   );
 }
 
-Widget difficultRouteButton() {
+Widget _difficultRouteButton() {
   return CustomButton(
+    textStyle: AppFonts.mulish.s16w600(color: AppColors.brandColors.grey),
     text: "Сложный маршрут",
     onTap: () {},
     textColor: AppColors.brandColors.grey,
@@ -149,8 +173,9 @@ Widget difficultRouteButton() {
   );
 }
 
-Widget searchButton() {
+Widget _searchButton() {
   return CustomButton(
+    textStyle: AppFonts.mulish.s16w600(color: AppColors.button.white),
     text: 'Поиск',
     icon: AppImages.other.searchIcon(color: AppColors.button.white),
     onTap: () {},
