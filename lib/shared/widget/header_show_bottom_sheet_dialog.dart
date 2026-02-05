@@ -4,10 +4,11 @@ import 'package:gts/generated/fonts/app_fonts.dart';
 
 class  HeaderShowBottomSheetDialog extends StatelessWidget {
   final String? title;
+  final TextStyle styleText;
   final Widget? child1;
   final Widget? child2;
 
- const HeaderShowBottomSheetDialog({ this.title,this.child1, this.child2,super.key,});
+ const HeaderShowBottomSheetDialog({ this.title,this.child1, this.child2,super.key, required this.styleText,});
 
   @override
   Widget build(BuildContext context) {
@@ -15,18 +16,18 @@ class  HeaderShowBottomSheetDialog extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       spacing: 10,
       children: [
-        _header(title ?? ''),
+        _header(title ?? '', styleText),
         child1 ?? Container(),
         child2 ?? Container(),
       ],
     );
   }
 }
-Widget _header(String title){
+Widget _header(String title , TextStyle styleText){
   return  Row(
     mainAxisAlignment: MainAxisAlignment.spaceBetween,
     children: [
-      Text(title ?? '', style: AppFonts.mulish.s18w700()),
+      Text(title ?? '', style: styleText),
       GestureDetector(
         onTap: () {},
         child: Container(

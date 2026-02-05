@@ -19,6 +19,7 @@ class AppImages {
   static final flight = _FlightIcons();
   static final background = _BackGround();
   static final logo = _Logo();
+  static final dialog = _DialogIconsForFlights();
   static final other = _WidgetOther();
 }
 
@@ -107,6 +108,20 @@ class _WidgetOther {
   Widget searchIcon({double? width, double? height, Color? color}) =>
       _svg("$_base/search.svg", width, height, color);
 
+  Widget notificationIcon({double? width, double? height, Color? color}) =>
+      _svg("$_base/notification_icons.svg", width, height, color);
 
 
+
+}
+
+class _DialogIconsForFlights {
+
+  static const String _base = 'assets/image/icons/flights';
+
+  Widget airportIcon({double? width, double? height, Color? color}) =>
+      _svg('$_base/airport_icons.svg', width, height, color);
+
+  Widget cityIcon({double? width, double? height, Color? color}) =>
+      _svg('$_base/city_icons.svg', width, height, color);
 }

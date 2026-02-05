@@ -38,20 +38,19 @@ class FormValueField extends StatelessWidget {
         padding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            if (hasValue)hintTextWidget(hint),
-             Expanded(
-              child: Row(
-                children: [
-                  Expanded(
-                    flex: isTextDown == false ? 4 :3,
-                    child: fontsSize(value, hint, hasValue,),
-                  ),
-                  if (hasValue && shortValue != null)
-                    shortValueTextWidget(shortValue),
-                  if (isIcon) iconWidget(),
-                ],
-              ),
+            if (hasValue) hintTextWidget(hint),
+            Row(
+              children: [
+                Expanded(
+                  flex: isTextDown == false ? 4 : 3,
+                  child: fontsSize(value, hint, hasValue),
+                ),
+                if (hasValue && shortValue != null)
+                  shortValueTextWidget(shortValue),
+                if (isIcon) iconWidget(),
+              ],
             ),
           ],
         ),

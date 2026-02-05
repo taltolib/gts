@@ -19,7 +19,9 @@ class _TestColor {
   Color black500 = Color(0xFF212121);
   Color textSecondary = Color(0xFF1E2633);
   Color grey = Color(0xFF44546F);
+  Color greyL = Color(0xFF44546F);
   Color greyLight = Color(0xFF626F86);
+
 
   Color accent = Color(0xFF00BCD4);
 
@@ -42,6 +44,7 @@ class _AppBrandColors {
   Color grey = Color(0xFF44546F);
   Color blueLight = Color(0xFFE9F2FF);
   Color white = Color(0xFFFFFFFF);
+
 }
 
 class _OtherColors {

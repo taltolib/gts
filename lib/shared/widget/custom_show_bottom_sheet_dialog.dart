@@ -7,7 +7,7 @@ Future<void> customShowBottomSheetDialog(
   double? heightSizeDialog,
   Widget header,
   Widget body,
-  Widget bottom,
+  Widget? bottom,
 ) async {
   showModalBottomSheet(
     isScrollControlled: true,

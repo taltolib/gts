@@ -1,14 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:gts/core/theme/app_colors.dart';
+import 'package:gts/features/search/presentation/models/location_item.dart';
 import 'package:gts/features/search/presentation/pages/tabs/flights/sheets/from_city_sheet.dart';
+import 'package:gts/features/search/presentation/pages/tabs/flights/state/location_search_notifier.dart';
 import 'package:gts/generated/fonts/app_fonts.dart';
 import 'package:gts/generated/image/app_image.dart';
+import 'package:gts/shared/widget/airport_tile.dart';
 import 'package:gts/shared/widget/button_replace.dart';
+import 'package:gts/shared/widget/city_tile.dart';
 import 'package:gts/shared/widget/custom_button.dart';
 import 'package:gts/shared/widget/custom_show_bottom_sheet_dialog.dart';
 import 'package:gts/shared/widget/form_value_field.dart';
+import 'package:gts/shared/widget/from_body_sheet.dart';
 import 'package:gts/shared/widget/header_show_bottom_sheet_dialog.dart';
 import 'package:gts/shared/widget/todo_choice_widget.dart';
+import 'package:provider/provider.dart';
 
 class FlightsTab extends StatefulWidget {
   const FlightsTab({super.key});
@@ -21,17 +27,25 @@ class _FlightsTabState extends State<FlightsTab> {
   bool isOneDay = false;
   bool inStock = false;
 
+  int _calcItemCount(LocationSearchNotifier res) {
+    if (res.isLoading || res.hasError || !res.hasResult) {
+      return 1;
+    }
+    return res.city!.children.length + 1;
+  }
+
   @override
   Widget build(BuildContext context) {
+    final res = context.watch<LocationSearchNotifier>();
     return Stack(
       children: [
         Column(
           mainAxisSize: MainAxisSize.min,
           children: [
             const SizedBox(height: 10),
-            _flightsFromData(context),
+            _flightsFromData(context, res, _calcItemCount),
             const SizedBox(height: 6),
-            _flightsToData(context),
+            _flightsToData(context , res, _calcItemCount),
             const SizedBox(height: 6),
             Row(
               children: [
@@ -41,7 +55,7 @@ class _FlightsTabState extends State<FlightsTab> {
               ],
             ),
             const SizedBox(height: 6),
-            _flightClassSelector(),
+            _flightClassSelector(context),
             const SizedBox(height: 15),
             Row(
               children: [
@@ -67,8 +81,11 @@ class _FlightsTabState extends State<FlightsTab> {
   }
 }
 
-
-Widget _flightsFromData(context) {
+Widget _flightsFromData(
+  context,
+  LocationSearchNotifier res,
+  Function calcItemCount,
+) {
   return FormValueField(
     hint: 'Откуда',
     onTap: () {
@@ -77,18 +94,53 @@ Widget _flightsFromData(context) {
         0.9,
         HeaderShowBottomSheetDialog(
           title: 'Откуда',
-          child1: FromCitySheet(),
-          child2: Container(),
+          styleText: AppFonts.mulish.s18w700(),
+          child1: FromCitySheet(onChanged: res.searchCity),
+        ),
+        Consumer<LocationSearchNotifier>(
+          builder: (context, res, _) {
+            return FromBodySheet(
+              itemCount: calcItemCount(res),
+              itemBuilder: (context, index) {
+                if (res.isLoading) {
+                  return   Padding(
+                    padding: EdgeInsets.all(16),
+                    child: Center(child: CircularProgressIndicator(color:AppColors.brandColors.blueAccent ,)),
+                  );
+                }
+
+                if (res.hasError) {
+                  return Padding(
+                    padding: const EdgeInsets.all(16),
+                    child: Center(
+                      child: Text(
+                        res.error!,
+                        style: AppFonts.mulish.s14w400(
+                          color: AppColors.fonts.error,
+                        ),
+                      ),
+                    ),
+                  );
+                }
+
+                if (!res.hasResult) {
+                  return const Padding(
+                    padding: EdgeInsets.all(16),
+                    child: Text(''),
+                  );
+                }
+
+                if (index == 0) {
+                  return CityTile(city: res.city!);
+                }
+
+                final airport = res.city!.children[index - 1];
+                return AirportTile(airport: airport);
+              },
+            );
+          },
         ),
         Container(),
-        CustomButton(
-          textStyle: AppFonts.mulish.s14w600(color: AppColors.button.white),
-          text: 'Готово',
-          onTap: () {},
-          backgroundColor: AppColors.brandColors.blueAccent,
-          textColor: AppColors.button.white,
-          style: AppButtonStyle.filled,
-        ),
       );
     },
     shortValue: '',
@@ -96,12 +148,66 @@ Widget _flightsFromData(context) {
   );
 }
 
-Widget _flightsToData(context) {
+Widget _flightsToData(context , LocationSearchNotifier res,Function calcItemCount) {
   return FormValueField(
-    onTap: () {},
+    onTap: () {
+      customShowBottomSheetDialog(
+        context,
+        0.9,
+        HeaderShowBottomSheetDialog(
+          title: 'Куда',
+          styleText: AppFonts.mulish.s18w700(),
+          child1: FromCitySheet(onChanged: res.searchCity),
+        ),
+        Consumer<LocationSearchNotifier>(
+          builder: (context, res, _) {
+            return FromBodySheet(
+              itemCount: calcItemCount(res),
+              itemBuilder: (context, index) {
+                if (res.isLoading) {
+                  return   Padding(
+                    padding: EdgeInsets.all(16),
+                    child: Center(child: CircularProgressIndicator(color:AppColors.brandColors.blueAccent ,)),
+                  );
+                }
+
+                if (res.hasError) {
+                  return Padding(
+                    padding: const EdgeInsets.all(16),
+                    child: Center(
+                      child: Text(
+                        res.error!,
+                        style: AppFonts.mulish.s14w400(
+                          color: AppColors.fonts.error,
+                        ),
+                      ),
+                    ),
+                  );
+                }
+
+                if (!res.hasResult) {
+                  return const Padding(
+                    padding: EdgeInsets.all(16),
+                    child: Text(''),
+                  );
+                }
+
+                if (index == 0) {
+                  return CityTile(city: res.city!);
+                }
+
+                final airport = res.city!.children[index - 1];
+                return AirportTile(airport: airport);
+              },
+            );
+          },
+        ),
+        Container(),
+      );
+    },
     hint: 'Куда',
-    shortValue: 'TASH',
-    value: 'Tashkent',
+    shortValue: '',
+    value: '',
   );
 }
 
@@ -117,9 +223,19 @@ Widget _flightsWhenData(context) {
   );
 }
 
-Widget _flightClassSelector() {
+Widget _flightClassSelector(context) {
   return FormValueField(
-    onTap: () {},
+    onTap: () {
+      // customShowBottomSheetDialog(
+      //   context,
+      //   0.4,
+      //   HeaderShowBottomSheetDialog(
+      //       title: 'Пассажиры и классы',
+      //       styleText: AppFonts.mulish.s18w700(),
+      //   )
+      //
+      // );
+    },
     hint: 'Эконом класс',
     shortValue: '',
     value: '1 пасажир',
