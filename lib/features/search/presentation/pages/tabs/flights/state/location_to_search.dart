@@ -23,8 +23,8 @@ class LocationToSearch  extends ChangeNotifier{
 
 
   Future<void> searchCity(String query) async {
-    if (query.trim().length < 2) return;
-    if(city!.code!.toLowerCase() == query) return;
+    if (query.trim().toLowerCase().length < 2) return;
+
 
     _isLoading = true;
     _error = null;

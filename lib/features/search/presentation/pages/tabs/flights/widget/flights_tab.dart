@@ -103,7 +103,11 @@ Widget _flightsFromData(
         HeaderShowBottomSheetDialog(
           title: 'Откуда',
           styleText: AppFonts.mulish.s18w700(),
-          child1: FromCitySheet(onChanged: res.searchCity),
+          child1: FromCitySheet(
+            onChanged: (value) {
+              res.searchCity(value);
+            },
+          ),
         ),
         Consumer<LocationFromSearch>(
           builder: (context, res, _) {
@@ -140,21 +144,19 @@ Widget _flightsFromData(
                   );
                 }
                 if (index == 0) {
-                  return GestureDetector(
-                    onTap: () {Navigator.pop(context);
-                      res.clear();
+                  return CityTile(
+                    city: res.city!,
+                    onTap: () {
+                      Navigator.of(context).pop();
                     },
-
-                    child: CityTile(city: res.city!),
                   );
                 }
-
                 final airport = res.city!.children[index - 1];
-                return GestureDetector(
-                  onTap: () {Navigator.pop(context);
-                    res.clear();
+                return AirportTile(
+                  airport: airport,
+                  onTap: () {
+                    Navigator.of(context).pop();
                   },
-                  child: AirportTile(airport: airport),
                 );
               },
             );
@@ -177,7 +179,11 @@ Widget _flightsToData(context, LocationToSearch res, Function calcItemCount) {
         HeaderShowBottomSheetDialog(
           title: 'Куда',
           styleText: AppFonts.mulish.s18w700(),
-          child1: FromCitySheet(onChanged: res.searchCity),
+          child1: FromCitySheet(
+            onChanged: (value) {
+              res.searchCity(value);
+            },
+          ),
         ),
         Consumer<LocationToSearch>(
           builder: (context, res, _) {
@@ -214,23 +220,19 @@ Widget _flightsToData(context, LocationToSearch res, Function calcItemCount) {
                   );
                 }
                 if (index == 0) {
-                  return GestureDetector(
+                  return CityTile(
+                    city: res.city!,
                     onTap: () {
-                      Navigator.pop(context);
-                      res.clear();
+                      Navigator.of(context).pop();
                     },
-                    child: CityTile(city: res.city!),
                   );
                 }
                 final airport = res.city!.children[index - 1];
-                return GestureDetector(
+                return AirportTile(
+                  airport: airport,
                   onTap: () {
-                    Navigator.pop(context);
-                    res.clear();
+                    Navigator.of(context).pop();
                   },
-                  child: GestureDetector( onTap: () {
-                    Navigator.pop(context);
-                  },child: AirportTile(airport: airport)),
                 );
               },
             );
@@ -260,15 +262,21 @@ Widget _flightsWhenData(context) {
 Widget _flightClassSelector(context) {
   return FormValueField(
     onTap: () {
-      // customShowBottomSheetDialog(
-      //   context,
-      //   0.4,
-      //   HeaderShowBottomSheetDialog(
-      //       title: 'Пассажиры и классы',
-      //       styleText: AppFonts.mulish.s18w700(),
-      //   )
-      //
-      // );
+      customShowBottomSheetDialog(
+        context,
+        0.6,
+        HeaderShowBottomSheetDialog(
+          title: 'Пассажиры и классы',
+          styleText: AppFonts.mulish.s18w700(),
+        ),
+        FromBodySheet(
+          itemCount: 1,
+          itemBuilder: (context, index) {
+            return Container();
+          },
+        ),
+        Container(),
+      );
     },
     hint: 'Эконом класс',
     shortValue: '',

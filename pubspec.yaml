@@ -24,10 +24,12 @@ dependencies:
   easy_localization: ^3.0.8
   #https://pub.dev/packages/provider
   provider: ^6.1.5+1
-
+  #https://pub.dev/packages/country_flags
   country_flags: ^4.1.2
   #https://pub.dev/packages/http
   http: ^1.6.0
+  #https://pub.dev/packages/scrollable_clean_calendar
+  scrollable_clean_calendar: ^1.5.0
 
 
 

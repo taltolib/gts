@@ -55,6 +55,7 @@ Widget buttonAddWidget (){
     iconColor: AppColors.brandColors.blueAccent,
     widthBorder: 1,
     borderColor: AppColors.brandColors.blueAccent,
+    // ignore: deprecated_member_use
     backgroundColor: AppColors.brandColors.blueAccent.withOpacity(0.08),
     textColor: AppColors.brandColors.blueAccent,
     style: AppButtonStyle.outlined,

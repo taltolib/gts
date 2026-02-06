@@ -6,28 +6,32 @@ import 'package:gts/generated/image/app_image.dart';
 
 class CityTile extends StatelessWidget {
   final LocationItem city;
+  final VoidCallback onTap;
 
-  const CityTile({required this.city});
+  const CityTile({required this.city, required this.onTap});
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-      child: Row(
-        children: [
-          _cityIcon(),
-          const SizedBox(width: 10),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                _title(city),
-                _subtitle(city),
-              ],
+    return GestureDetector(
+      onTap: onTap,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+        child: Row(
+          children: [
+            _cityIcon(),
+            const SizedBox(width: 10),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  _title(city),
+                  _subtitle(city),
+                ],
+              ),
             ),
-          ),
-          _cityCode(city),
-        ],
+            _cityCode(city),
+          ],
+        ),
       ),
     );
   }
@@ -43,7 +47,7 @@ Widget _cityIcon(){
 
 Widget _title (LocationItem city){
   return  Text(
-    city.title,
+    city.title ?? '',
     style: AppFonts.mulish.s16w600(
       color: AppColors.fonts.black500,
     ),

@@ -44,7 +44,7 @@ class _AppBrandColors {
   Color grey = Color(0xFF44546F);
   Color blueLight = Color(0xFFE9F2FF);
   Color white = Color(0xFFFFFFFF);
-
+  Color grey200 =Color(0xFFEAECF0);
 }
 
 class _OtherColors {

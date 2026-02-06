@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:gts/core/theme/app_colors.dart';
-import 'package:gts/generated/fonts/app_fonts.dart';
 
 class  HeaderShowBottomSheetDialog extends StatelessWidget {
   final String? title;
@@ -16,20 +15,20 @@ class  HeaderShowBottomSheetDialog extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       spacing: 10,
       children: [
-        _header(title ?? '', styleText),
+        _header(title ?? '', styleText, context),
         child1 ?? Container(),
         child2 ?? Container(),
       ],
     );
   }
 }
-Widget _header(String title , TextStyle styleText){
+Widget _header(String title , TextStyle styleText ,context){
   return  Row(
     mainAxisAlignment: MainAxisAlignment.spaceBetween,
     children: [
-      Text(title ?? '', style: styleText),
+      Text(title, style: styleText),
       GestureDetector(
-        onTap: () {},
+        onTap: () => Navigator.of(context).pop(),
         child: Container(
           height: 34,
           width: 34,
@@ -40,7 +39,7 @@ Widget _header(String title , TextStyle styleText){
             ),
             borderRadius: BorderRadius.circular(32),
           ),
-          child: const Icon(Icons.close, size: 18),
+          child:  const Icon(Icons.close, size: 18),
         ),
       ),
     ],

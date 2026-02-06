@@ -94,6 +94,7 @@ class _WidgetOther {
   Widget swapRoute({double? width, double? height, Color? color}) =>
       _svg('$_base/swap_route.svg', width, height, color);
 
+  // ignore: non_constant_identifier_names
   Widget ArrowDownIcon({double? width, double? height, Color? color}) =>
       _svg('$_base/arrow_down.svg', width, height, color);
 

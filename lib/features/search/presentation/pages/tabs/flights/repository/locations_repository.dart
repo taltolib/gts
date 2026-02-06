@@ -18,4 +18,5 @@ class LocationsRepository {
     return LocationMapper.mapCity(data);
   }
 
-}
+  }
+
