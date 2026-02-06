@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:gts/features/search/presentation/models/location_item.dart';
 import 'package:gts/features/search/presentation/pages/tabs/flights/repository/locations_repository.dart';
 
-class LocationSearchNotifier extends ChangeNotifier {
+class LocationFromSearch extends ChangeNotifier {
   final LocationsRepository repository;
 
-  LocationSearchNotifier(this.repository);
+  LocationFromSearch(this.repository);
 
 
   LocationItem? _city;

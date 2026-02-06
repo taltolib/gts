@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:gts/core/theme/app_colors.dart';
-import 'package:gts/features/search/presentation/models/location_item.dart';
 import 'package:gts/features/search/presentation/pages/tabs/flights/sheets/from_city_sheet.dart';
-import 'package:gts/features/search/presentation/pages/tabs/flights/state/location_search_notifier.dart';
+import 'package:gts/features/search/presentation/pages/tabs/flights/state/location_from_search.dart';
+import 'package:gts/features/search/presentation/pages/tabs/flights/state/location_to_search.dart';
 import 'package:gts/generated/fonts/app_fonts.dart';
 import 'package:gts/generated/image/app_image.dart';
 import 'package:gts/shared/widget/airport_tile.dart';
@@ -27,25 +27,33 @@ class _FlightsTabState extends State<FlightsTab> {
   bool isOneDay = false;
   bool inStock = false;
 
-  int _calcItemCount(LocationSearchNotifier res) {
-    if (res.isLoading || res.hasError || !res.hasResult) {
+  int _calcItemIsFromCount(LocationFromSearch resFrom) {
+    if (resFrom.isLoading || resFrom.hasError || !resFrom.hasResult) {
       return 1;
     }
-    return res.city!.children.length + 1;
+    return resFrom.city!.children.length + 1;
+  }
+
+  int _calcItemIsToCount(LocationToSearch resTo) {
+    if (resTo.isLoading || resTo.hasError || !resTo.hasResult) {
+      return 1;
+    }
+    return resTo.city!.children.length + 1;
   }
 
   @override
   Widget build(BuildContext context) {
-    final res = context.watch<LocationSearchNotifier>();
+    final resFrom = context.watch<LocationFromSearch>();
+    final resTo = context.watch<LocationToSearch>();
     return Stack(
       children: [
         Column(
           mainAxisSize: MainAxisSize.min,
           children: [
             const SizedBox(height: 10),
-            _flightsFromData(context, res, _calcItemCount),
+            _flightsFromData(context, resFrom, _calcItemIsFromCount),
             const SizedBox(height: 6),
-            _flightsToData(context , res, _calcItemCount),
+            _flightsToData(context, resTo, _calcItemIsToCount),
             const SizedBox(height: 6),
             Row(
               children: [
@@ -83,7 +91,7 @@ class _FlightsTabState extends State<FlightsTab> {
 
 Widget _flightsFromData(
   context,
-  LocationSearchNotifier res,
+  LocationFromSearch res,
   Function calcItemCount,
 ) {
   return FormValueField(
@@ -97,18 +105,21 @@ Widget _flightsFromData(
           styleText: AppFonts.mulish.s18w700(),
           child1: FromCitySheet(onChanged: res.searchCity),
         ),
-        Consumer<LocationSearchNotifier>(
+        Consumer<LocationFromSearch>(
           builder: (context, res, _) {
             return FromBodySheet(
               itemCount: calcItemCount(res),
               itemBuilder: (context, index) {
                 if (res.isLoading) {
-                  return   Padding(
+                  return Padding(
                     padding: EdgeInsets.all(16),
-                    child: Center(child: CircularProgressIndicator(color:AppColors.brandColors.blueAccent ,)),
+                    child: Center(
+                      child: CircularProgressIndicator(
+                        color: AppColors.brandColors.blueAccent,
+                      ),
+                    ),
                   );
                 }
-
                 if (res.hasError) {
                   return Padding(
                     padding: const EdgeInsets.all(16),
@@ -122,20 +133,29 @@ Widget _flightsFromData(
                     ),
                   );
                 }
-
                 if (!res.hasResult) {
                   return const Padding(
                     padding: EdgeInsets.all(16),
                     child: Text(''),
                   );
                 }
-
                 if (index == 0) {
-                  return CityTile(city: res.city!);
+                  return GestureDetector(
+                    onTap: () {Navigator.pop(context);
+                      res.clear();
+                    },
+
+                    child: CityTile(city: res.city!),
+                  );
                 }
 
                 final airport = res.city!.children[index - 1];
-                return AirportTile(airport: airport);
+                return GestureDetector(
+                  onTap: () {Navigator.pop(context);
+                    res.clear();
+                  },
+                  child: AirportTile(airport: airport),
+                );
               },
             );
           },
@@ -143,12 +163,12 @@ Widget _flightsFromData(
         Container(),
       );
     },
-    shortValue: '',
-    value: '',
+    shortValue: res.city?.code ?? '',
+    value: res.city?.title ?? '',
   );
 }
 
-Widget _flightsToData(context , LocationSearchNotifier res,Function calcItemCount) {
+Widget _flightsToData(context, LocationToSearch res, Function calcItemCount) {
   return FormValueField(
     onTap: () {
       customShowBottomSheetDialog(
@@ -159,18 +179,21 @@ Widget _flightsToData(context , LocationSearchNotifier res,Function calcItemCoun
           styleText: AppFonts.mulish.s18w700(),
           child1: FromCitySheet(onChanged: res.searchCity),
         ),
-        Consumer<LocationSearchNotifier>(
+        Consumer<LocationToSearch>(
           builder: (context, res, _) {
             return FromBodySheet(
               itemCount: calcItemCount(res),
               itemBuilder: (context, index) {
                 if (res.isLoading) {
-                  return   Padding(
+                  return Padding(
                     padding: EdgeInsets.all(16),
-                    child: Center(child: CircularProgressIndicator(color:AppColors.brandColors.blueAccent ,)),
+                    child: Center(
+                      child: CircularProgressIndicator(
+                        color: AppColors.brandColors.blueAccent,
+                      ),
+                    ),
                   );
                 }
-
                 if (res.hasError) {
                   return Padding(
                     padding: const EdgeInsets.all(16),
@@ -184,20 +207,31 @@ Widget _flightsToData(context , LocationSearchNotifier res,Function calcItemCoun
                     ),
                   );
                 }
-
                 if (!res.hasResult) {
                   return const Padding(
                     padding: EdgeInsets.all(16),
                     child: Text(''),
                   );
                 }
-
                 if (index == 0) {
-                  return CityTile(city: res.city!);
+                  return GestureDetector(
+                    onTap: () {
+                      Navigator.pop(context);
+                      res.clear();
+                    },
+                    child: CityTile(city: res.city!),
+                  );
                 }
-
                 final airport = res.city!.children[index - 1];
-                return AirportTile(airport: airport);
+                return GestureDetector(
+                  onTap: () {
+                    Navigator.pop(context);
+                    res.clear();
+                  },
+                  child: GestureDetector( onTap: () {
+                    Navigator.pop(context);
+                  },child: AirportTile(airport: airport)),
+                );
               },
             );
           },
@@ -206,8 +240,8 @@ Widget _flightsToData(context , LocationSearchNotifier res,Function calcItemCoun
       );
     },
     hint: 'Куда',
-    shortValue: '',
-    value: '',
+    shortValue: res.city?.code ?? '',
+    value: res.city?.title ?? '',
   );
 }
 
