@@ -1,5 +1,5 @@
 import 'package:flutter/foundation.dart';
-import 'package:gts/features/search/presentation/models/location_item.dart';
+import 'package:gts/domain/models/location_item.dart';
 import 'package:gts/features/search/presentation/pages/tabs/flights/repository/locations_repository.dart';
 
 class LocationToSearch  extends ChangeNotifier{

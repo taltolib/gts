@@ -1,4 +1,4 @@
-import 'package:gts/features/search/presentation/models/location_item.dart';
+import 'package:gts/domain/models/location_item.dart';
 import 'package:gts/features/search/presentation/pages/tabs/flights/data/api/locations_api.dart';
 import 'package:gts/features/search/presentation/pages/tabs/flights/data/mapper/location_mapper.dart';
 
@@ -14,9 +14,8 @@ class LocationsRepository {
     if (data == null || data.isEmpty) {
       throw Exception('Город не найден');
     }
-
     return LocationMapper.mapCity(data);
   }
 
-  }
+}
 

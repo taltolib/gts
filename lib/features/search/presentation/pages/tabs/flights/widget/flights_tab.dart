@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:gts/core/theme/app_colors.dart';
 import 'package:gts/features/search/presentation/pages/tabs/flights/sheets/from_city_sheet.dart';
+import 'package:gts/features/search/presentation/pages/tabs/flights/state/flight_search_provider.dart';
 import 'package:gts/features/search/presentation/pages/tabs/flights/state/location_from_search.dart';
 import 'package:gts/features/search/presentation/pages/tabs/flights/state/location_to_search.dart';
+import 'package:gts/features/search/presentation/pages/tabs/flights/state/passengers_provider.dart';
 import 'package:gts/generated/fonts/app_fonts.dart';
 import 'package:gts/generated/image/app_image.dart';
 import 'package:gts/shared/widget/airport_tile.dart';
+import 'package:gts/shared/widget/animated_choice_tile.dart';
 import 'package:gts/shared/widget/button_replace.dart';
 import 'package:gts/shared/widget/city_tile.dart';
 import 'package:gts/shared/widget/custom_button.dart';
@@ -13,6 +16,7 @@ import 'package:gts/shared/widget/custom_show_bottom_sheet_dialog.dart';
 import 'package:gts/shared/widget/form_value_field.dart';
 import 'package:gts/shared/widget/from_body_sheet.dart';
 import 'package:gts/shared/widget/header_show_bottom_sheet_dialog.dart';
+import 'package:gts/shared/widget/passenger_counter_tile.dart';
 import 'package:gts/shared/widget/todo_choice_widget.dart';
 import 'package:provider/provider.dart';
 
@@ -26,6 +30,12 @@ class FlightsTab extends StatefulWidget {
 class _FlightsTabState extends State<FlightsTab> {
   bool isOneDay = false;
   bool inStock = false;
+  Map<String, String> value = {
+    'Взрослые': 'Старше 12',
+    'Дети': 'Дети 2-12',
+    'Младенцы': 'без место',
+  };
+  List<String> className = ['Эконом класс', 'Бизнес класс', 'Первый класс'];
 
   int _calcItemIsFromCount(LocationFromSearch resFrom) {
     if (resFrom.isLoading || resFrom.hasError || !resFrom.hasResult) {
@@ -63,22 +73,23 @@ class _FlightsTabState extends State<FlightsTab> {
               ],
             ),
             const SizedBox(height: 6),
-            _flightClassSelector(context),
+            _flightClassSelector(
+                context, value, className),
             const SizedBox(height: 15),
             Row(
               children: [
                 _isOneDayButtonWidget(
                   isOneDay,
-                  () => setState(() => isOneDay = !isOneDay),
+                      () => setState(() => isOneDay = !isOneDay),
                 ),
                 _inStockButtonWidget(
                   inStock,
-                  () => setState(() => inStock = !inStock),
+                      () => setState(() => inStock = !inStock),
                 ),
               ],
             ),
             const SizedBox(height: 15),
-            _searchButton(),
+            _searchButton(context),
             const SizedBox(height: 10),
             _difficultRouteButton(),
           ],
@@ -89,11 +100,9 @@ class _FlightsTabState extends State<FlightsTab> {
   }
 }
 
-Widget _flightsFromData(
-  context,
-  LocationFromSearch res,
-  Function calcItemCount,
-) {
+Widget _flightsFromData(context,
+    LocationFromSearch res,
+    Function calcItemCount,) {
   return FormValueField(
     hint: 'Откуда',
     onTap: () {
@@ -259,29 +268,92 @@ Widget _flightsWhenData(context) {
   );
 }
 
-Widget _flightClassSelector(context) {
+Widget _flightClassSelector(BuildContext context,
+    Map<String, String> map,
+    List<String> list,) {
+  final p = context.watch<PassengersProvider>();
+
   return FormValueField(
+    hint: 'Эконом класс',
+    shortValue: '',
+    value: '${p.total} пассажир',
+    isIcon: true,
     onTap: () {
       customShowBottomSheetDialog(
         context,
-        0.6,
+        0.7,
         HeaderShowBottomSheetDialog(
           title: 'Пассажиры и классы',
           styleText: AppFonts.mulish.s18w700(),
         ),
-        FromBodySheet(
-          itemCount: 1,
-          itemBuilder: (context, index) {
-            return Container();
-          },
+        Column(
+          children: [
+            Expanded(
+              flex: 2,
+              child: FromBodySheet(
+                itemCount: map.length,
+                itemBuilder: (context, index) {
+                  final title = map.keys.elementAt(index);
+                  final subtitle = map.values.elementAt(index);
+
+                  return Consumer<PassengersProvider>(
+                    builder: (_, p, __) {
+                      return PassengerCounterTile(
+                        title: title,
+                        subtitle: subtitle,
+                        value: title == 'Взрослые'
+                            ? p.adults
+                            : title == 'Дети'
+                            ? p.children
+                            : p.infants,
+                        plusEnabled: p.canIncrement(title),
+                        minusEnabled: p.canDecrement(title),
+                        onTapPlus: () => p.increment(title),
+                        onTapMinus: () => p.decrement(title),
+                      );
+                    },
+                  );
+                },
+              ),
+            ),
+            const Divider(),
+            Expanded(
+              flex: 2,
+              child: FromBodySheet(
+                itemCount: list.length,
+                itemBuilder: (context, index) {
+                  final title = list[index];
+                  return Consumer<PassengersProvider>(
+                    builder: (_, p, __) {
+                      return Padding(
+                        padding: const EdgeInsets.only(top: 8),
+                        child: AnimatedChoiceTile(
+                          title: title,
+                          selected: p.flightClass == title,
+                          onTap: () => p.setClass(title),
+                        ),
+                      );
+                    },
+                  );
+                },
+              ),
+            ),
+          ],
         ),
-        Container(),
+        Padding(
+          padding: const EdgeInsets.symmetric(vertical: 15),
+          child: CustomButton(
+              text: 'Готово',
+              height: 40,
+              onTap: () => Navigator.pop(context),
+              backgroundColor: AppColors.brandColors.blueAccent,
+              textColor: AppColors.button.white,
+              style: AppButtonStyle.filled,
+              textStyle: AppFonts.mulish.s16w600(color: AppColors.button.white),
+          ),
+        ),
       );
     },
-    hint: 'Эконом класс',
-    shortValue: '',
-    value: '1 пасажир',
-    isIcon: true,
   );
 }
 
@@ -331,12 +403,14 @@ Widget _difficultRouteButton() {
   );
 }
 
-Widget _searchButton() {
+Widget _searchButton(context) {
   return CustomButton(
     textStyle: AppFonts.mulish.s16w600(color: AppColors.button.white),
     text: 'Поиск',
     icon: AppImages.other.searchIcon(color: AppColors.button.white),
-    onTap: () {},
+    onTap: () {
+      context.read<FlightSearchProvider>().search();
+    },
     iconColor: AppColors.button.white,
     backgroundColor: AppColors.brandColors.blueAccent,
     textColor: AppColors.button.white,

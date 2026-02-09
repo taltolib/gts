@@ -1,5 +1,5 @@
-import 'package:gts/features/search/presentation/models/location_item.dart';
-import 'package:gts/features/search/presentation/pages/tabs/flights/data/models/model_locations_response.dart';
+import 'package:gts/domain/models/location_item.dart';
+ import 'package:gts/features/search/presentation/pages/tabs/flights/data/models/model_locations_response.dart';
 
 class LocationMapper {
   static LocationItem mapCity(List<Datum> data) {
@@ -8,15 +8,7 @@ class LocationMapper {
         .where((e) => e.isAirport == true)
         .map(mapAirport)
         .toList();
-    final cityCode =
-        cityDatum.iataCode ??
-        airports
-            .firstWhere(
-              (a) => a.code != null,
-              orElse: () => LocationItem(title: ''),
-            )
-            .code;
-
+    final cityCode = cityDatum.iataCode ?? airports.firstWhere((a) => a.code != null, orElse: () => LocationItem(title: ''),).code;
     return LocationItem(
       type: LocationItemType.city,
       title: cityDatum.cityRus ?? '',

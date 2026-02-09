@@ -18,7 +18,6 @@ class AnimatedChoiceTile extends StatelessWidget {
   final double height;
   final double radius;
 
-
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -31,7 +30,9 @@ class AnimatedChoiceTile extends StatelessWidget {
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(radius),
           border: Border.all(
-            color: selected ? AppColors.brandColors.blueAccent :AppColors.brandColors.grey200,
+            color: selected
+                ? AppColors.brandColors.blueAccent
+                : AppColors.brandColors.grey200,
             width: 1.0,
           ),
           color: selected
@@ -44,7 +45,7 @@ class AnimatedChoiceTile extends StatelessWidget {
             const SizedBox(width: 12),
             Text(
               title,
-              style: AppFonts.mulish.s15w500(color: AppColors.fonts.black500 ),
+              style: AppFonts.mulish.s15w500(color: AppColors.fonts.black500),
             ),
           ],
         ),
@@ -68,8 +69,8 @@ class _RadioDot extends StatelessWidget {
         shape: BoxShape.circle,
         border: Border.all(
           color: selected
-              ?  AppColors.brandColors.blueAccent
-              :  AppColors.brandColors.grey200,
+              ? AppColors.brandColors.blueAccent
+              : AppColors.brandColors.grey200,
           width: 2,
         ),
       ),
@@ -78,7 +79,7 @@ class _RadioDot extends StatelessWidget {
           duration: const Duration(milliseconds: 180),
           width: selected ? 10 : 0,
           height: selected ? 10 : 0,
-          decoration:  BoxDecoration(
+          decoration: BoxDecoration(
             shape: BoxShape.circle,
             color: AppColors.brandColors.blueAccent,
           ),

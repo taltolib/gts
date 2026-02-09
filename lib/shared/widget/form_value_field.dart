@@ -28,7 +28,7 @@ class FormValueField extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        height: 52,
+        height: 56,
         width: double.infinity,
         decoration: BoxDecoration(
           border: Border.all(color: AppColors.other.greyLightBorder),
@@ -44,12 +44,12 @@ class FormValueField extends StatelessWidget {
             Row(
               children: [
                 Expanded(
-                  flex: isTextDown == false ? 4 : 3,
+                  flex: 3,
                   child: fontsSize(value, hint, hasValue),
                 ),
                 if (hasValue && shortValue != null)
                   shortValueTextWidget(shortValue),
-                if (isIcon) iconWidget(),
+                if (isIcon) iconWidget()
               ],
             ),
           ],

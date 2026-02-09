@@ -2,8 +2,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:gts/core/theme/app_colors.dart';
-import 'package:gts/features/search/presentation/models/location_item.dart';
-import 'package:gts/generated/fonts/app_fonts.dart';
+import 'package:gts/domain/models/location_item.dart';
+ import 'package:gts/generated/fonts/app_fonts.dart';
 import 'package:gts/generated/image/app_image.dart';
 
 class AirportTile extends StatelessWidget {
